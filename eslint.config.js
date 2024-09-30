@@ -12,7 +12,7 @@ const compat = new FlatCompat();
 
 export default [
   {
-    ignores: ["**/dist", "eslint.config.js", "src/**/*.gen.ts", "tailwind.config.js"],
+    ignores: ["**/dist", "eslint.config.js", "src/**/*.gen.ts", "tailwind.config.js", "postcss.config.js"],
   },
   eslint.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
