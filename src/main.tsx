@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import Top from "./routes/Top.tsx";
 import Chat from "./routes/Chat.tsx";
+import TermsOfService from "./routes/TermOfService.tsx"
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/chat",
     element: <Chat />,
+  },
+  {
+    path: "/terms",
+    element: <TermsOfService />,
   }
 ]);
 

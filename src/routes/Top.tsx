@@ -87,7 +87,7 @@ export default function TopPage() {
             <a href="#" className="mr-4">
               プライバシーポリシー
             </a>
-            <a href="#" className="mr-4">
+            <a href="/terms" className="mr-4">
               利用規約
             </a>
             <a href="#">お問い合わせ</a>
