@@ -84,7 +84,7 @@ export default function TopPage() {
         <div className="mx-auto flex max-w-7xl justify-between px-4 sm:px-6 lg:px-8">
           <p>© 2024 壁打ちゴロー. All rights reserved.</p>
           <div>
-            <a href="#" className="mr-4">
+            <a href="/privacy" className="mr-4">
               プライバシーポリシー
             </a>
             <a href="/terms" className="mr-4">
