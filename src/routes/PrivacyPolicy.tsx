@@ -6,7 +6,7 @@ export default function PrivacyPolicy() {
       {/* Header */}
       <header className="bg-white shadow-sm">
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 sm:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold text-blue-600">壁打ちゴロー</h1>
+          <h1 className="text-2xl font-bold text-blue-600">ai_rubber_duck</h1>
           <a href="/" className="text-blue-600 hover:text-blue-800">
             ホームに戻る
           </a>
@@ -23,7 +23,7 @@ export default function PrivacyPolicy() {
         <div className="mb-8 rounded-lg bg-white p-6 shadow-md">
           <p className="mb-4 text-gray-600">最終更新日: 2024年4月1日</p>
           <p className="mb-4">
-            壁打ちゴロー（以下、「当社」）は、ユーザーの個人情報の保護を重要視し、以下のプライバシーポリシーに基づいて個人情報を取り扱います。
+            ai_rubber_duck（以下、「当社」）は、ユーザーの個人情報の保護を重要視し、以下のプライバシーポリシーに基づいて個人情報を取り扱います。
           </p>
         </div>
 
@@ -97,7 +97,7 @@ export default function PrivacyPolicy() {
             プライバシーポリシーに関するお問い合わせは、以下の連絡先までご連絡ください。
           </p>
           <a href="mailto:privacy@kabeuchi-goro.com" className="text-blue-600 hover:underline">
-            privacy@kabeuchi-goro.com
+            privacy@ai.com
           </a>
         </div>
       </main>
@@ -105,7 +105,7 @@ export default function PrivacyPolicy() {
       {/* Footer */}
       <footer className="bg-gray-800 py-8 text-white">
         <div className="mx-auto flex max-w-7xl justify-between px-4 sm:px-6 lg:px-8">
-          <p>© 2024 壁打ちゴロー. All rights reserved.</p>
+          <p>© 2024 ai_rubber_duck. All rights reserved.</p>
           <div>
             <a href="#" className="mr-4">
               プライバシーポリシー

@@ -6,7 +6,7 @@ export default function TermsOfService() {
       {/* Header */}
       <header className="bg-white shadow-sm">
         <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 sm:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold text-blue-600">壁打ちゴロー</h1>
+          <h1 className="text-2xl font-bold text-blue-600">ai_rubber_duck</h1>
           <a href="/" className="text-blue-600 hover:text-blue-800">
             ホームに戻る
           </a>
@@ -20,7 +20,7 @@ export default function TermsOfService() {
         <div className="mb-8 rounded-lg bg-white p-6 shadow-md">
           <p className="mb-4 text-gray-600">最終更新日: 2024年4月1日</p>
           <p className="mb-4">
-            以下の利用規約（以下、「本規約」）は、壁打ちゴロー（以下、「当社」）が提供するAIチャットサービス（以下、「本サービス」）の利用条件を定めるものです。本サービスをご利用いただく前に、本規約をよくお読みください。
+            以下の利用規約（以下、「本規約」）は、ai_rubber_duck（以下、「当社」）が提供するAIチャットサービス（以下、「本サービス」）の利用条件を定めるものです。本サービスをご利用いただく前に、本規約をよくお読みください。
           </p>
         </div>
 
@@ -77,7 +77,7 @@ export default function TermsOfService() {
             本規約に関してご不明な点がある場合は、以下の連絡先までお問い合わせください。
           </p>
           <a href="mailto:support@kabeuchi-goro.com" className="text-blue-600 hover:underline">
-            support@kabeuchi-goro.com
+            support@ai.com
           </a>
         </div>
       </main>
@@ -85,7 +85,7 @@ export default function TermsOfService() {
       {/* Footer */}
       <footer className="bg-gray-800 py-8 text-white">
         <div className="mx-auto flex max-w-7xl justify-between px-4 sm:px-6 lg:px-8">
-          <p>© 2024 壁打ちゴロー. All rights reserved.</p>
+          <p>© 2024 ai_rubber_duck. All rights reserved.</p>
           <div>
             <a href="#" className="mr-4">
               プライバシーポリシー
