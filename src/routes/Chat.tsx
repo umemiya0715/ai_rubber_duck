@@ -6,7 +6,7 @@ type Message = {
   isUser: boolean;
 };
 
-function ChatMockup() {
+export default function ChatMockup() {
   const [messages, setMessages] = useState<Message[]>([
     { text: "こんにちは！私はAIアシスタントの「〇〇」だよ。何か相談したいことはある？", isUser: false },
     { text: "最近、仕事のストレスが溜まってて…", isUser: true },
@@ -55,5 +55,3 @@ function ChatMockup() {
     </div>
   );
 }
-
-export default ChatMockup;
