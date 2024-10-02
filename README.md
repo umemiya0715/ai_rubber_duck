@@ -63,3 +63,9 @@ ai_rubber_duckは、個性豊かなAIキャラクターと対話しながら思�
 ### AI
 - Bedrock(claude)
 - AWS Comprehend
+
+### 画面遷移図(作成途中)
+ - https://www.figma.com/design/AFYpAX4rjgB4wBFIVMpaTG/ai_rubber_duck?m=auto&t=1abbyNVZpFPbnPHr-6
+
+### AWS構成図(作成途中)
+ - https://drive.google.com/file/d/1ig7djbtaypX70F-kEiVNb0idxTowGHdS/view?usp=sharing
