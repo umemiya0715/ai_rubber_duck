@@ -58,11 +58,8 @@ ai_rubber_duckは、個性豊かなAIキャラクターと対話しながら思�
 - AWS CloudFront
 - AWS Certificate Manager
 - Route53
+- AWS Cognito
 
 ### AI
 - Bedrock(claude)
-
-### 検討中
 - AWS Comprehend
-- AWS Cognito
-- AWS AppSync
