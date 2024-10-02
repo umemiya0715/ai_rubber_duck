@@ -4,6 +4,7 @@ import Top from "./routes/Top.tsx";
 import Chat from "./routes/Chat.tsx";
 import TermsOfService from "./routes/TermOfService.tsx";
 import PrivacyPolicy from "./routes/PrivacyPolicy.tsx";
+import ContactForm from "./routes/ContactForm.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
   {
     path: "/privacy",
     element: <PrivacyPolicy />,
-  }
+  },
+  {
+    path: "/contact",
+    element: <ContactForm />,
+  },
 ]);
 
 const rootElement = document.getElementById("root");

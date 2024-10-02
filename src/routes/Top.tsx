@@ -90,7 +90,7 @@ export default function TopPage() {
             <a href="/terms" className="mr-4">
               利用規約
             </a>
-            <a href="#">お問い合わせ</a>
+            <a href="/contact">お問い合わせ</a>
           </div>
         </div>
       </footer>
