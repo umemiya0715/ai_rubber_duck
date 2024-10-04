@@ -63,7 +63,7 @@ export default function ChatMockup() {
           value={input}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setInput(e.target.value)}
           placeholder="メッセージを入力..."
-          className="flex-1 rounded-l-lg border p-2"
+          className="flex-1 resize-none rounded-l-lg border p-2"
         />
         <button
           type="button"
