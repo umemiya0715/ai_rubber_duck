@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Send, User, Bot, LoaderCircle } from "lucide-react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 type Message = {
   text: string;
@@ -19,6 +20,16 @@ export default function ChatMockup() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { aiId } = useParams<{ aiId: string }>();
+  const [apiUrl, setApiUrl] = useState<string>("");
+
+  useEffect(() => {
+    if (aiId === "aiA") {
+      setApiUrl(import.meta.env.VITE_BEDROCK_API_AiA);
+    } else if (aiId === "aiB") {
+      setApiUrl(import.meta.env.VITE_BEDROCK_API_AiB);
+    }
+  }, [aiId]);
 
   async function sendMessage() {
     setIsLoading(true);
@@ -28,7 +39,7 @@ export default function ChatMockup() {
 
     try {
       const response = await axios.post<ApiResponse>(
-        import.meta.env.VITE_BEDROCK_API_URL,
+        apiUrl,
         { message: input },
         {
           headers: {
@@ -54,7 +65,7 @@ export default function ChatMockup() {
             <div className={`max-w-[70%] rounded-lg p-3 ${message.isUser ? "bg-blue-500 text-white" : "bg-gray-200"}`}>
               <div className="mb-2 flex items-center">
                 {message.isUser ? <User className="mr-2" size={20} /> : <Bot className="mr-2" size={20} />}
-                <span className="font-bold">{message.isUser ? "あなた" : "ドラゴン"}</span>
+                <span className="font-bold">{message.isUser ? "あなた" : aiId === "aiA" ? "龍神" : "ドラゴン"}</span>
               </div>
               <p>{message.text}</p>
             </div>
@@ -80,7 +91,7 @@ export default function ChatMockup() {
       </div>
       {isLoading && (
         <div className="fixed left-0 top-0 z-50 grid size-full place-items-center bg-gray-200 opacity-40">
-          <LoaderCircle className="size-12 animate-spin"/>
+          <LoaderCircle className="size-12 animate-spin" />
         </div>
       )}
     </div>

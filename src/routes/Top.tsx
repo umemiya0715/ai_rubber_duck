@@ -33,9 +33,12 @@ export default function TopPage() {
           <p className="mx-auto mt-5 max-w-xl text-xl text-gray-500">
             ai_rubber_duckは、特徴的なキャラクターを持つAIと対話しながら、あなたの悩みや思考を整理するためのサービスです。
           </p>
-          <div className="mt-8">
-            <a href={"/chat"} className="rounded-md bg-blue-600 px-8 py-3 text-lg font-semibold text-white">
-              今すぐ始める
+          <div className="mt-8 flex justify-center gap-x-5">
+            <a href={"/chat/aiA"} className="rounded-md bg-blue-600 px-8 py-3 text-lg font-semibold text-white">
+              今すぐ始めるA
+            </a>
+            <a href={"/chat/aiB"} className="rounded-md bg-blue-600 px-8 py-3 text-lg font-semibold text-white">
+              今すぐ始めるB
             </a>
           </div>
         </div>

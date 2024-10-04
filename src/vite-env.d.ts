@@ -2,7 +2,8 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly VITE_BEDROCK_API_URL: string;
+  readonly VITE_BEDROCK_API_AiA: string;
+  readonly VITE_BEDROCK_API_AiB: string;
   readonly VITE_BEDROCK_API_KEY: string;
 }
 

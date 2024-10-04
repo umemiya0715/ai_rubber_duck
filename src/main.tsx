@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     element: <Top />,
   },
   {
-    path: "/chat",
+    path: "/chat/:aiId",
     element: <Chat />,
   },
   {
