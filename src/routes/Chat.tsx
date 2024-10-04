@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send, User, Bot } from "lucide-react";
+import { Send, User, Bot, LoaderCircle } from "lucide-react";
 import axios from "axios";
 
 type Message = {
@@ -18,8 +18,10 @@ type ApiResponse = {
 export default function ChatMockup() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function sendMessage() {
+    setIsLoading(true);
     const userMessage = { text: input, isUser: true };
     setMessages(prevMessages => [...prevMessages, userMessage]);
     setInput("");
@@ -37,6 +39,7 @@ export default function ChatMockup() {
       );
       const botMessage = { text: response.data.body.content[0].text, isUser: false };
       setMessages(prevMessages => [...prevMessages, botMessage]);
+      setIsLoading(false);
     } catch (error) {
       console.error(error);
     }
@@ -75,6 +78,11 @@ export default function ChatMockup() {
           <Send size={20} />
         </button>
       </div>
+      {isLoading && (
+        <div className="fixed left-0 top-0 z-50 grid size-full place-items-center bg-gray-200 opacity-40">
+          <LoaderCircle className="size-12 animate-spin"/>
+        </div>
+      )}
     </div>
   );
 }
