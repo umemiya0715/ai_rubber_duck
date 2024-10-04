@@ -1,28 +1,46 @@
 import { useState } from "react";
 import { Send, User, Bot } from "lucide-react";
+import axios from "axios";
 
 type Message = {
   text: string;
   isUser: boolean;
 };
 
+type ApiResponse = {
+  body: {
+    content: {
+      text: string;
+    }[];
+  };
+};
+
 export default function ChatMockup() {
-  const [messages, setMessages] = useState<Message[]>([
-    { text: "こんにちは！私はAIアシスタントの「〇〇」だよ。何か相談したいことはある？", isUser: false },
-    { text: "最近、仕事のストレスが溜まってて…", isUser: true },
-    {
-      text: "そうか、仕事のストレスか。辛いよな。でも、お前ならきっと乗り越えられるぜ！具体的にどんなことがストレスになってるんだ？",
-      isUser: false,
-    },
-  ]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>("");
 
-  const handleSend = (): void => {
-    if (input.trim()) {
-      setMessages([...messages, { text: input, isUser: true }]);
-      setInput("");
+  async function sendMessage() {
+    const userMessage = { text: input, isUser: true };
+    setMessages(prevMessages => [...prevMessages, userMessage]);
+    setInput("");
+
+    try {
+      const response = await axios.post<ApiResponse>(
+        import.meta.env.VITE_BEDROCK_API_URL,
+        { message: input },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-API-KEY": import.meta.env.VITE_BEDROCK_API_KEY,
+          },
+        },
+      );
+      const botMessage = { text: response.data.body.content[0].text, isUser: false };
+      setMessages(prevMessages => [...prevMessages, botMessage]);
+    } catch (error) {
+      console.error(error);
     }
-  };
+  }
 
   return (
     <div className="mx-auto flex h-screen max-w-2xl flex-col bg-gray-100 p-4">
@@ -41,14 +59,19 @@ export default function ChatMockup() {
         ))}
       </div>
       <div className="flex items-center">
-        <input
-          type="text"
+        <textarea
           value={input}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setInput(e.target.value)}
           placeholder="メッセージを入力..."
           className="flex-1 rounded-l-lg border p-2"
         />
-        <button type="button" onClick={handleSend} className="rounded-r-lg bg-blue-500 p-2 text-white">
+        <button
+          type="button"
+          onClick={() => {
+            void sendMessage();
+          }}
+          className="rounded-r-lg bg-blue-500 p-2 text-white"
+        >
           <Send size={20} />
         </button>
       </div>
