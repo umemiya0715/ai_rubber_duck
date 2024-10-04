@@ -52,6 +52,7 @@ export default function ChatMockup() {
       setMessages(prevMessages => [...prevMessages, botMessage]);
       setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       console.error(error);
     }
   }
