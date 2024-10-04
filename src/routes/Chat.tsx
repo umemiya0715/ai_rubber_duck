@@ -1,28 +1,61 @@
-import { useState } from "react";
-import { Send, User, Bot } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Send, User, Bot, LoaderCircle } from "lucide-react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 type Message = {
   text: string;
   isUser: boolean;
 };
 
-export default function ChatMockup() {
-  const [messages, setMessages] = useState<Message[]>([
-    { text: "こんにちは！私はAIアシスタントの「〇〇」だよ。何か相談したいことはある？", isUser: false },
-    { text: "最近、仕事のストレスが溜まってて…", isUser: true },
-    {
-      text: "そうか、仕事のストレスか。辛いよな。でも、お前ならきっと乗り越えられるぜ！具体的にどんなことがストレスになってるんだ？",
-      isUser: false,
-    },
-  ]);
-  const [input, setInput] = useState<string>("");
-
-  const handleSend = (): void => {
-    if (input.trim()) {
-      setMessages([...messages, { text: input, isUser: true }]);
-      setInput("");
-    }
+type ApiResponse = {
+  body: {
+    content: {
+      text: string;
+    }[];
   };
+};
+
+export default function ChatMockup() {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [input, setInput] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { aiId } = useParams<{ aiId: string }>();
+  const [apiUrl, setApiUrl] = useState<string>("");
+
+  useEffect(() => {
+    if (aiId === "aiA") {
+      setApiUrl(import.meta.env.VITE_BEDROCK_API_AiA);
+    } else if (aiId === "aiB") {
+      setApiUrl(import.meta.env.VITE_BEDROCK_API_AiB);
+    }
+  }, [aiId]);
+
+  async function sendMessage() {
+    setIsLoading(true);
+    const userMessage = { text: input, isUser: true };
+    setMessages(prevMessages => [...prevMessages, userMessage]);
+    setInput("");
+
+    try {
+      const response = await axios.post<ApiResponse>(
+        apiUrl,
+        { message: input },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "X-API-KEY": import.meta.env.VITE_BEDROCK_API_KEY,
+          },
+        },
+      );
+      const botMessage = { text: response.data.body.content[0].text, isUser: false };
+      setMessages(prevMessages => [...prevMessages, botMessage]);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      console.error(error);
+    }
+  }
 
   return (
     <div className="mx-auto flex h-screen max-w-2xl flex-col bg-gray-100 p-4">
@@ -33,7 +66,7 @@ export default function ChatMockup() {
             <div className={`max-w-[70%] rounded-lg p-3 ${message.isUser ? "bg-blue-500 text-white" : "bg-gray-200"}`}>
               <div className="mb-2 flex items-center">
                 {message.isUser ? <User className="mr-2" size={20} /> : <Bot className="mr-2" size={20} />}
-                <span className="font-bold">{message.isUser ? "あなた" : "〇〇"}</span>
+                <span className="font-bold">{message.isUser ? "あなた" : aiId === "aiA" ? "龍神" : "ドラゴン"}</span>
               </div>
               <p>{message.text}</p>
             </div>
@@ -41,17 +74,27 @@ export default function ChatMockup() {
         ))}
       </div>
       <div className="flex items-center">
-        <input
-          type="text"
+        <textarea
           value={input}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
-          placeholder="メッセージを入力..."
-          className="flex-1 rounded-l-lg border p-2"
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setInput(e.target.value)}
+          placeholder="相談内容を入力..."
+          className="flex-1 resize-none rounded-l-lg border p-2"
         />
-        <button type="button" onClick={handleSend} className="rounded-r-lg bg-blue-500 p-2 text-white">
+        <button
+          type="button"
+          onClick={() => {
+            void sendMessage();
+          }}
+          className="rounded-r-lg bg-blue-500 p-2 text-white"
+        >
           <Send size={20} />
         </button>
       </div>
+      {isLoading && (
+        <div className="fixed left-0 top-0 z-50 grid size-full place-items-center bg-gray-200 opacity-40">
+          <LoaderCircle className="size-12 animate-spin" />
+        </div>
+      )}
     </div>
   );
 }
