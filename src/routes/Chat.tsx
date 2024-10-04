@@ -51,7 +51,7 @@ export default function ChatMockup() {
             <div className={`max-w-[70%] rounded-lg p-3 ${message.isUser ? "bg-blue-500 text-white" : "bg-gray-200"}`}>
               <div className="mb-2 flex items-center">
                 {message.isUser ? <User className="mr-2" size={20} /> : <Bot className="mr-2" size={20} />}
-                <span className="font-bold">{message.isUser ? "あなた" : "〇〇"}</span>
+                <span className="font-bold">{message.isUser ? "あなた" : "ドラゴン"}</span>
               </div>
               <p>{message.text}</p>
             </div>
@@ -62,7 +62,7 @@ export default function ChatMockup() {
         <textarea
           value={input}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setInput(e.target.value)}
-          placeholder="メッセージを入力..."
+          placeholder="相談内容を入力..."
           className="flex-1 resize-none rounded-l-lg border p-2"
         />
         <button
