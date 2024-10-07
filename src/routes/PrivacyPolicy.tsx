@@ -1,4 +1,4 @@
-import { ChevronRight, Shield } from "lucide-react";
+import { FaChevronRight, FaShieldAlt } from "react-icons/fa";
 
 export default function PrivacyPolicy() {
   return (
@@ -16,7 +16,7 @@ export default function PrivacyPolicy() {
       {/* Main Content */}
       <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8 flex items-center justify-center">
-          <Shield className="mr-4 size-12 text-blue-600" />
+          <FaShieldAlt className="mr-4 size-12 text-blue-600" />
           <h2 className="text-3xl font-bold">プライバシーポリシー</h2>
         </div>
 
@@ -125,7 +125,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section>
       <h3 className="mb-4 flex items-center text-xl font-semibold">
-        <ChevronRight className="mr-2 size-5 text-blue-600" />
+        <FaChevronRight className="mr-2 size-5 text-blue-600" />
         {title}
       </h3>
       <div className="pl-7">{children}</div>

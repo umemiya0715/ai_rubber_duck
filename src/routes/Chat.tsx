@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { Send, User, Bot, LoaderCircle } from "lucide-react";
+import { BsFillSendArrowUpFill, BsPersonCircle } from "react-icons/bs";
+import { GiSeaDragon, GiSpikedDragonHead } from "react-icons/gi";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
@@ -65,7 +67,13 @@ export default function ChatMockup() {
           <div key={index} className={`flex ${message.isUser ? "justify-end" : "justify-start"} mb-4`}>
             <div className={`max-w-[70%] rounded-lg p-3 ${message.isUser ? "bg-blue-500 text-white" : "bg-gray-200"}`}>
               <div className="mb-2 flex items-center">
-                {message.isUser ? <User className="mr-2" size={20} /> : <Bot className="mr-2" size={20} />}
+                {message.isUser ? (
+                  <BsPersonCircle className="mr-2" size={20} />
+                ) : aiId === "aiA" ? (
+                  <GiSeaDragon className="mr-2" size={20} />
+                ) : (
+                  <GiSpikedDragonHead className="mr-2" size={20} />
+                )}
                 <span className="font-bold">{message.isUser ? "あなた" : aiId === "aiA" ? "龍神" : "ドラゴン"}</span>
               </div>
               <p>{message.text}</p>
@@ -87,12 +95,12 @@ export default function ChatMockup() {
           }}
           className="rounded-r-lg bg-blue-500 p-2 text-white"
         >
-          <Send size={20} />
+          <BsFillSendArrowUpFill size={20} />
         </button>
       </div>
       {isLoading && (
         <div className="fixed left-0 top-0 z-50 grid size-full place-items-center bg-gray-200 opacity-40">
-          <LoaderCircle className="size-12 animate-spin" />
+          <AiOutlineLoading3Quarters className="size-12 animate-spin" />
         </div>
       )}
     </div>

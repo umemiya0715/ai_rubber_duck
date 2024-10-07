@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react";
+import { FaChevronRight } from "react-icons/fa";
 
 export default function TermsOfService() {
   return (
@@ -105,7 +105,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section>
       <h3 className="mb-4 flex items-center text-xl font-semibold">
-        <ChevronRight className="mr-2 size-5 text-blue-600" />
+        <FaChevronRight className="mr-2 size-5 text-blue-600" />
         {title}
       </h3>
       <div className="pl-7">{children}</div>

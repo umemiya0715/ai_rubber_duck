@@ -1,4 +1,4 @@
-import { MessageSquare, Users, Lock, Zap } from "lucide-react";
+import { BsChatDotsFill, BsPersonCircle, BsFillShieldLockFill, BsFillLightningFill } from "react-icons/bs";
 
 type FeatureCardProps = {
   icon: React.ReactNode;
@@ -49,22 +49,22 @@ export default function TopPage() {
         <h3 className="mb-8 text-center text-3xl font-bold">サービスの特徴</h3>
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
           <FeatureCard
-            icon={<MessageSquare className="size-12 text-blue-500" />}
+            icon={<BsChatDotsFill className="size-12 text-blue-500" />}
             title="24時間対応"
             description="いつでもどこでも、あなたの都合の良いタイミングで相談できます。"
           />
           <FeatureCard
-            icon={<Users className="size-12 text-green-500" />}
+            icon={<BsPersonCircle className="size-12 text-green-500" />}
             title="個性豊かなAI"
             description="様々な個性を持つAIキャラクターがあなたの相談相手になります。"
           />
           <FeatureCard
-            icon={<Lock className="size-12 text-red-500" />}
+            icon={<BsFillShieldLockFill className="size-12 text-red-500" />}
             title="プライバシー保護"
             description="あなたの相談内容は厳重に保護され、安心して利用できます。"
           />
           <FeatureCard
-            icon={<Zap className="size-12 text-yellow-500" />}
+            icon={<BsFillLightningFill className="size-12 text-yellow-500" />}
             title="思考の整理"
             description="対話を通じて、自分の考えを整理し、新しい気づきを得られます。"
           />
