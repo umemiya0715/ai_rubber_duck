@@ -1,10 +1,10 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import Top from "./routes/Top.tsx";
-import Chat from "./routes/Chat.tsx";
-import TermsOfService from "./routes/TermOfService.tsx";
-import PrivacyPolicy from "./routes/PrivacyPolicy.tsx";
-import ContactForm from "./routes/ContactForm.tsx";
+import Top from "./features/Top.tsx";
+import Chat from "./features/Chat.tsx";
+import TermsOfService from "./features/TermOfService.tsx";
+import PrivacyPolicy from "./features/PrivacyPolicy.tsx";
+import ContactForm from "./features/ContactForm.tsx";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
