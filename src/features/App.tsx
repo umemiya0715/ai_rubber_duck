@@ -18,5 +18,5 @@ export default function App() {
         <Route path="/contact" element={<ContactForm />} />
       </Routes>
     </>
-  )
+  );
 }
