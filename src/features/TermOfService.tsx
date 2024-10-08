@@ -3,16 +3,6 @@ import { FaChevronRight } from "react-icons/fa";
 export default function TermsOfService() {
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 sm:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold text-blue-600">ai_rubber_duck</h1>
-          <a href="/" className="text-blue-600 hover:text-blue-800">
-            ホームに戻る
-          </a>
-        </nav>
-      </header>
-
       {/* Main Content */}
       <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <h2 className="mb-8 text-3xl font-bold">利用規約</h2>

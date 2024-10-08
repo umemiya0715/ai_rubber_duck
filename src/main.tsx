@@ -1,42 +1,17 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import Top from "./features/Top.tsx";
-import Chat from "./features/Chat.tsx";
-import TermsOfService from "./features/TermOfService.tsx";
-import PrivacyPolicy from "./features/PrivacyPolicy.tsx";
-import ContactForm from "./features/ContactForm.tsx";
 import "./index.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Top />,
-  },
-  {
-    path: "/chat/:aiId",
-    element: <Chat />,
-  },
-  {
-    path: "/terms",
-    element: <TermsOfService />,
-  },
-  {
-    path: "/privacy",
-    element: <PrivacyPolicy />,
-  },
-  {
-    path: "/contact",
-    element: <ContactForm />,
-  },
-]);
+import App from "./features/App.tsx";
+import { BrowserRouter } from "react-router-dom";
 
 const rootElement = document.getElementById("root");
 if (rootElement) {
   const root = ReactDOM.createRoot(rootElement);
   root.render(
     <StrictMode>
-      <RouterProvider router={router} />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </StrictMode>,
   );
 }

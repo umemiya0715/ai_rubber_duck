@@ -61,7 +61,6 @@ export default function ChatMockup() {
 
   return (
     <div className="mx-auto flex h-screen max-w-2xl flex-col bg-gray-100 p-4">
-      <h1 className="mb-4 text-center text-2xl font-bold">AI_ラバーダック</h1>
       <div className="mb-4 flex-1 overflow-y-auto rounded-lg bg-white p-4 shadow">
         {messages.map((message, index) => (
           <div key={index} className={`flex ${message.isUser ? "justify-end" : "justify-start"} mb-4`}>
