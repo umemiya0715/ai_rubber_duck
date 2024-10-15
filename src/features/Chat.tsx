@@ -3,12 +3,8 @@ import { BsFillSendArrowUpFill, BsPersonCircle } from "react-icons/bs";
 import { GiSeaDragon, GiSpikedDragonHead } from "react-icons/gi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-
-type Message = {
-  text: string;
-  isUser: boolean;
-};
+import { useChangeAi } from "../hooks/useChangeAi";
+import { useChatMessages } from "../hooks/useChatMessages";
 
 type ApiResponse = {
   body: {
@@ -19,24 +15,24 @@ type ApiResponse = {
 };
 
 export default function ChatMockup() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const { chatMessages, addChatMessages } = useChatMessages();
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { aiId } = useParams<{ aiId: string }>();
+  const { currentAi } = useChangeAi();
   const [apiUrl, setApiUrl] = useState<string>("");
 
   useEffect(() => {
-    if (aiId === "aiA") {
+    if (currentAi === "aiA") {
       setApiUrl(import.meta.env.VITE_BEDROCK_API_AiA);
-    } else if (aiId === "aiB") {
+    } else if (currentAi === "aiB") {
       setApiUrl(import.meta.env.VITE_BEDROCK_API_AiB);
     }
-  }, [aiId]);
+  }, [currentAi]);
 
   async function sendMessage() {
     setIsLoading(true);
     const userMessage = { text: input, isUser: true };
-    setMessages(prevMessages => [...prevMessages, userMessage]);
+    addChatMessages(userMessage);
     setInput("");
 
     try {
@@ -51,7 +47,7 @@ export default function ChatMockup() {
         },
       );
       const botMessage = { text: response.data.body.content[0].text, isUser: false };
-      setMessages(prevMessages => [...prevMessages, botMessage]);
+      addChatMessages(botMessage);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -62,18 +58,20 @@ export default function ChatMockup() {
   return (
     <div className="mx-auto flex h-screen max-w-2xl flex-col bg-gray-100 p-4">
       <div className="mb-4 flex-1 overflow-y-auto rounded-lg bg-white p-4 shadow">
-        {messages.map((message, index) => (
+        {chatMessages.map((message, index) => (
           <div key={index} className={`flex ${message.isUser ? "justify-end" : "justify-start"} mb-4`}>
             <div className={`max-w-[70%] rounded-lg p-3 ${message.isUser ? "bg-blue-500 text-white" : "bg-gray-200"}`}>
               <div className="mb-2 flex items-center">
                 {message.isUser ? (
                   <BsPersonCircle className="mr-2" size={20} />
-                ) : aiId === "aiA" ? (
+                ) : currentAi === "aiA" ? (
                   <GiSeaDragon className="mr-2" size={20} />
                 ) : (
                   <GiSpikedDragonHead className="mr-2" size={20} />
                 )}
-                <span className="font-bold">{message.isUser ? "あなた" : aiId === "aiA" ? "龍神" : "ドラゴン"}</span>
+                <span className="font-bold">
+                  {message.isUser ? "あなた" : currentAi === "aiA" ? "龍神" : "ドラゴン"}
+                </span>
               </div>
               <p>{message.text}</p>
             </div>
