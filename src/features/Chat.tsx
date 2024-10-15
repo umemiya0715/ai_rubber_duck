@@ -3,7 +3,7 @@ import { BsFillSendArrowUpFill, BsPersonCircle } from "react-icons/bs";
 import { GiSeaDragon, GiSpikedDragonHead } from "react-icons/gi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useChangeAi } from "../hooks/useChangeAi";
 
 type Message = {
   text: string;
@@ -22,16 +22,16 @@ export default function ChatMockup() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { aiId } = useParams<{ aiId: string }>();
+  const { currentAi } = useChangeAi();
   const [apiUrl, setApiUrl] = useState<string>("");
 
   useEffect(() => {
-    if (aiId === "aiA") {
+    if (currentAi === "aiA") {
       setApiUrl(import.meta.env.VITE_BEDROCK_API_AiA);
-    } else if (aiId === "aiB") {
+    } else if (currentAi === "aiB") {
       setApiUrl(import.meta.env.VITE_BEDROCK_API_AiB);
     }
-  }, [aiId]);
+  }, [currentAi]);
 
   async function sendMessage() {
     setIsLoading(true);
@@ -68,12 +68,14 @@ export default function ChatMockup() {
               <div className="mb-2 flex items-center">
                 {message.isUser ? (
                   <BsPersonCircle className="mr-2" size={20} />
-                ) : aiId === "aiA" ? (
+                ) : currentAi === "aiA" ? (
                   <GiSeaDragon className="mr-2" size={20} />
                 ) : (
                   <GiSpikedDragonHead className="mr-2" size={20} />
                 )}
-                <span className="font-bold">{message.isUser ? "あなた" : aiId === "aiA" ? "龍神" : "ドラゴン"}</span>
+                <span className="font-bold">
+                  {message.isUser ? "あなた" : currentAi === "aiA" ? "龍神" : "ドラゴン"}
+                </span>
               </div>
               <p>{message.text}</p>
             </div>

@@ -12,7 +12,7 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Top />} />
-        <Route path="/chat/:aiId" element={<Chat />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="/terms" element={<TermsOfService />} />
         <Route path="/privacy" element={<PrivacyPolicy />} />
         <Route path="/contact" element={<ContactForm />} />
