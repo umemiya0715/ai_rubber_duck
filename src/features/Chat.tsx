@@ -4,11 +4,7 @@ import { GiSeaDragon, GiSpikedDragonHead } from "react-icons/gi";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import axios from "axios";
 import { useChangeAi } from "../hooks/useChangeAi";
-
-type Message = {
-  text: string;
-  isUser: boolean;
-};
+import { useChatMessages } from "../hooks/useChatMessages";
 
 type ApiResponse = {
   body: {
@@ -19,7 +15,7 @@ type ApiResponse = {
 };
 
 export default function ChatMockup() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const { chatMessages, addChatMessages } = useChatMessages();
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { currentAi } = useChangeAi();
@@ -36,7 +32,7 @@ export default function ChatMockup() {
   async function sendMessage() {
     setIsLoading(true);
     const userMessage = { text: input, isUser: true };
-    setMessages(prevMessages => [...prevMessages, userMessage]);
+    addChatMessages(userMessage);
     setInput("");
 
     try {
@@ -51,7 +47,7 @@ export default function ChatMockup() {
         },
       );
       const botMessage = { text: response.data.body.content[0].text, isUser: false };
-      setMessages(prevMessages => [...prevMessages, botMessage]);
+      addChatMessages(botMessage);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -62,7 +58,7 @@ export default function ChatMockup() {
   return (
     <div className="mx-auto flex h-screen max-w-2xl flex-col bg-gray-100 p-4">
       <div className="mb-4 flex-1 overflow-y-auto rounded-lg bg-white p-4 shadow">
-        {messages.map((message, index) => (
+        {chatMessages.map((message, index) => (
           <div key={index} className={`flex ${message.isUser ? "justify-end" : "justify-start"} mb-4`}>
             <div className={`max-w-[70%] rounded-lg p-3 ${message.isUser ? "bg-blue-500 text-white" : "bg-gray-200"}`}>
               <div className="mb-2 flex items-center">

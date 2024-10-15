@@ -1,12 +1,15 @@
 import { useChangeAi } from "../hooks/useChangeAi";
 import { useLocation } from "react-router-dom";
+import { useChatMessages } from "../hooks/useChatMessages";
 
 export default function Header() {
   const { currentAi, switchAi } = useChangeAi();
   const location = useLocation();
+  const { clearMessages } = useChatMessages();
 
   function handleSwitchAi() {
     switchAi();
+    clearMessages();
   }
 
   return (
@@ -17,11 +20,7 @@ export default function Header() {
         </a>
         <div>
           {location.pathname === "/chat" && (
-            <button
-              type="button"
-              className="mr-2 rounded-md bg-blue-500 px-4 py-2 text-white"
-              onClick={handleSwitchAi}
-            >
+            <button type="button" className="mr-2 rounded-md bg-blue-500 px-4 py-2 text-white" onClick={handleSwitchAi}>
               {currentAi === "aiA" ? "aiBに相談" : "aiAに相談"}
             </button>
           )}
