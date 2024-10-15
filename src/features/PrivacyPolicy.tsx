@@ -1,22 +1,13 @@
-import { ChevronRight, Shield } from "lucide-react";
+import { FaChevronRight, FaShieldAlt } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 export default function PrivacyPolicy() {
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 sm:px-6 lg:px-8">
-          <h1 className="text-2xl font-bold text-blue-600">ai_rubber_duck</h1>
-          <a href="/" className="text-blue-600 hover:text-blue-800">
-            ホームに戻る
-          </a>
-        </nav>
-      </header>
-
       {/* Main Content */}
       <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-8 flex items-center justify-center">
-          <Shield className="mr-4 size-12 text-blue-600" />
+          <FaShieldAlt className="mr-4 size-12 text-blue-600" />
           <h2 className="text-3xl font-bold">プライバシーポリシー</h2>
         </div>
 
@@ -102,21 +93,7 @@ export default function PrivacyPolicy() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 py-8 text-white">
-        <div className="mx-auto flex max-w-7xl justify-between px-4 sm:px-6 lg:px-8">
-          <p>© 2024 ai_rubber_duck. All rights reserved.</p>
-          <div>
-            <a href="#" className="mr-4">
-              プライバシーポリシー
-            </a>
-            <a href="#" className="mr-4">
-              利用規約
-            </a>
-            <a href="#">お問い合わせ</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
@@ -125,7 +102,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <section>
       <h3 className="mb-4 flex items-center text-xl font-semibold">
-        <ChevronRight className="mr-2 size-5 text-blue-600" />
+        <FaChevronRight className="mr-2 size-5 text-blue-600" />
         {title}
       </h3>
       <div className="pl-7">{children}</div>
