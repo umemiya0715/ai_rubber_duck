@@ -15,7 +15,7 @@ type ApiResponse = {
 };
 
 export default function ChatMockup() {
-  const { chatMessages, addChatMessages } = useChatMessages();
+  const { chatMessages, addUserMessages, addAiMessages, createChatContext } = useChatMessages();
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { currentAi } = useChangeAi();
@@ -31,14 +31,14 @@ export default function ChatMockup() {
 
   async function sendMessage() {
     setIsLoading(true);
-    const userMessage = { text: input, isUser: true };
-    addChatMessages(userMessage);
+    addUserMessages(input);
     setInput("");
+    const context = createChatContext(input);
 
     try {
       const response = await axios.post<ApiResponse>(
         apiUrl,
-        { message: input },
+        { context: context },
         {
           headers: {
             "Content-Type": "application/json",
@@ -46,8 +46,7 @@ export default function ChatMockup() {
           },
         },
       );
-      const botMessage = { text: response.data.body.content[0].text, isUser: false };
-      addChatMessages(botMessage);
+      addAiMessages(response.data.body.content[0].text);
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -59,10 +58,12 @@ export default function ChatMockup() {
     <div className="mx-auto flex h-screen max-w-2xl flex-col bg-gray-100 p-4">
       <div className="mb-4 flex-1 overflow-y-auto rounded-lg bg-white p-4 shadow">
         {chatMessages.map((message, index) => (
-          <div key={index} className={`flex ${message.isUser ? "justify-end" : "justify-start"} mb-4`}>
-            <div className={`max-w-[70%] rounded-lg p-3 ${message.isUser ? "bg-blue-500 text-white" : "bg-gray-200"}`}>
+          <div key={index} className={`flex ${message.role === "user" ? "justify-end" : "justify-start"} mb-4`}>
+            <div
+              className={`max-w-[70%] rounded-lg p-3 ${message.role === "user" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
+            >
               <div className="mb-2 flex items-center">
-                {message.isUser ? (
+                {message.role === "user" ? (
                   <BsPersonCircle className="mr-2" size={20} />
                 ) : currentAi === "aiA" ? (
                   <GiSeaDragon className="mr-2" size={20} />
@@ -70,10 +71,10 @@ export default function ChatMockup() {
                   <GiSpikedDragonHead className="mr-2" size={20} />
                 )}
                 <span className="font-bold">
-                  {message.isUser ? "あなた" : currentAi === "aiA" ? "龍神" : "ドラゴン"}
+                  {message.role === "user" ? "あなた" : currentAi === "aiA" ? "龍神" : "ドラゴン"}
                 </span>
               </div>
-              <p>{message.text}</p>
+              <p>{message.content}</p>
             </div>
           </div>
         ))}
